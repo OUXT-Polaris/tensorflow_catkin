@@ -12,14 +12,7 @@ set(NUM_MAKE_JOBS "" CACHE STRING "Number of jobs concurrently run during the bu
 set(CUDA_VERSION $ENV{CUDA_VERSION} CACHE STRING "CUDA version")
 set(CUDNN_VERSION $ENV{CUDNN_VERSION} CACHE STRING "CUDNN version")
 
-if(${CMAKE_VERSION} VERSION_LESS "3.7.0")
-       # ExternalProject_Add doesn't know the option SOURCE_SUBDIR in CMake before 3.7
-       file(DOWNLOAD "https://raw.githubusercontent.com/Kitware/CMake/v3.8.0/Modules/ExternalProject.cmake" ${CMAKE_CURRENT_SOURCE_DIR}/ExternalProject.cmake)
-       include(${CMAKE_CURRENT_SOURCE_DIR}/ExternalProject.cmake)
-else()
-  include(ExternalProject)
-endif()
-
+include(${CMAKE_CURRENT_SOURCE_DIR}/ExternalProject.cmake)
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(tensorflow_src
